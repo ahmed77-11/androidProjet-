@@ -33,11 +33,11 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Food"
                     android:layout_marginEnd="5dp"
+                    android:text="Resto"
+                    android:textColor="@color/black"
                     android:textSize="45dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView2"
