@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AndroidProjectResto"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.list_resto_admin"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Maps"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DetailActivity"
             android:exported="false" />
         <activity
@@ -39,6 +45,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/my_key_app_key" />
     </application>
 
 </manifest>

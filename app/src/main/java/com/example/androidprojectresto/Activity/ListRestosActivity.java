@@ -67,14 +67,11 @@ public class ListRestosActivity extends AppCompatActivity {
         DatabaseReference restoRef = database.getReference("resto");
         DatabaseReference timeRef = database.getReference("Time");
 
-        // Show progress bar while loading
         binding.progressBar.setVisibility(View.VISIBLE);
 
-        // Lists to hold fetched data
         ArrayList<Resto> restoList = new ArrayList<>();
         ArrayList<Time> timeList = new ArrayList<>();
 
-        // Determine query based on search or category
         Query query = isSearch
                 ? restoRef.orderByChild("Title").startAt(searchText).endAt(searchText + '\uf8ff')
                 : restoRef.orderByChild("CategoryId").equalTo(categoryId);
@@ -91,7 +88,6 @@ public class ListRestosActivity extends AppCompatActivity {
                         }
                     }
 
-                    // Fetch time data
                     timeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot timeSnapshot) {
@@ -104,16 +100,13 @@ public class ListRestosActivity extends AppCompatActivity {
                                 }
                             }
 
-                            // Set up RecyclerView with fetched data
                             setupRecyclerView(restoList, timeList);
 
-                            // Hide progress bar
                             binding.progressBar.setVisibility(View.GONE);
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            // Handle error while fetching time data
                             handleError("Failed to load time data: " + error.getMessage());
                         }
                     });

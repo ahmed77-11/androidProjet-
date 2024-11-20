@@ -62,6 +62,17 @@ public class MainActivity extends BaseActivity {
         initRecommended();
         initCategory();
         setVaraible();
+        initLocation();
+    }
+
+    private void initLocation() {
+        binding.LocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this, Maps.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void setVaraible() {
