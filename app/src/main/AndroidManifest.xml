@@ -13,7 +13,16 @@
         android:theme="@style/Theme.AndroidProjectResto"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.list_resto_admin"
+            android:name=".Activity.ModifResto"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.add_category"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.addRestoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ListRestoAdminActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.Maps"

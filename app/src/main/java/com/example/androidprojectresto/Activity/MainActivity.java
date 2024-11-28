@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
-    private static final long TEN_DAYS_MILLIS = 10 * 24 * 60 * 60 * 1000L; // 10 days in milliseconds
+    private static final long TEN_DAYS_MILLIS = 60L * 24 * 60 * 60 * 1000L; // 10 days in milliseconds
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -92,6 +92,12 @@ public class MainActivity extends BaseActivity {
                 i.putExtra("isSearch",true);
                 startActivity(i);
             }
+        });
+
+
+        binding.filterBtn.setOnClickListener(v -> {
+            Intent i=new Intent(MainActivity.this, ListRestoAdminActivity.class);
+            startActivity(i);
         });
     }
 
@@ -205,6 +211,7 @@ public class MainActivity extends BaseActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle error for Resto data
                 binding.progressBarCategory.setVisibility(View.GONE);
+                Log.d("ManualMapping", error.getMessage().toString());
                 // Log error
             }
         });

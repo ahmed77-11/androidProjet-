@@ -98,4 +98,6 @@ public class RestoListAdapter extends RecyclerView.Adapter<RestoListAdapter.view
 
         }
     }
+
+
 }

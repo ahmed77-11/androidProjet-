@@ -3,7 +3,7 @@ package com.example.androidprojectresto.Domain;
 import java.io.Serializable;
 
 public class Resto implements Serializable {
-    private int categoryId;
+    private int CategoryId;
     private String Description;
     private boolean Recomanded;
     private int id;
@@ -24,11 +24,11 @@ public class Resto implements Serializable {
     }
 
     public int getCategoryId() {
-        return categoryId;
+        return CategoryId;
     }
 
     public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+        this.CategoryId = categoryId;
     }
 
     public String getDescription() {

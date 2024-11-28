@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.androidprojectresto.R;
 
-public class list_resto_admin extends AppCompatActivity {
+public class add_category extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_resto_admin);
+        setContentView(R.layout.activity_add_category);
     }
 }
