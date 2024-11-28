@@ -34,6 +34,7 @@ public class ListRestosActivity extends AppCompatActivity {
     private String categoryName;
     private String searchText;
     private boolean isSearch;
+    private int locationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class ListRestosActivity extends AppCompatActivity {
         categoryName = getIntent().getStringExtra("CategoryName");
         searchText = getIntent().getStringExtra("text");
         isSearch = getIntent().getBooleanExtra("isSearch", false);
+        locationId = getIntent().getIntExtra("LocationId", 0); // Get LocationId
 
         // Set title and back button functionality
         binding.titleTxt.setText(categoryName);
@@ -72,10 +74,14 @@ public class ListRestosActivity extends AppCompatActivity {
         ArrayList<Resto> restoList = new ArrayList<>();
         ArrayList<Time> timeList = new ArrayList<>();
 
-        Query query = isSearch
-                ? restoRef.orderByChild("Title").startAt(searchText).endAt(searchText + '\uf8ff')
-                : restoRef.orderByChild("CategoryId").equalTo(categoryId);
-
+        Query query;
+        if (isSearch) {
+            query = restoRef.orderByChild("Title").startAt(searchText).endAt(searchText + '\uf8ff');
+        } else if (locationId != 0) {
+            query = restoRef.orderByChild("LocationId").equalTo(locationId); // Query by LocationId
+        } else {
+            query = restoRef.orderByChild("CategoryId").equalTo(categoryId);
+        }
         // Fetch resto data
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

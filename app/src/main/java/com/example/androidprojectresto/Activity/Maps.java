@@ -3,6 +3,7 @@ package com.example.androidprojectresto.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +56,27 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         myMap = googleMap;
+        myMap.setOnMarkerClickListener(marker -> {
+            // Find the selected Location based on the marker's title
+            String locationName = marker.getTitle();
+            Location selectedLocation = null;
+
+            for (Location loc : locations) {
+                if (loc.getLoc().equals(locationName)) {
+                    selectedLocation = loc;
+                    break;
+                }
+            }
+
+            if (selectedLocation != null) {
+                // Start ListRestosActivity and pass LocationId
+                Intent intent = new Intent(Maps.this, ListRestosActivity.class);
+                intent.putExtra("LocationId", selectedLocation.getId());
+                intent.putExtra("LocationName", selectedLocation.getLoc()); // Optional for UI
+                startActivity(intent);
+            }
+            return false; // Return false to indicate default behavior (center map on marker)
+        });
     }
 
     private void fetchAndPopulateSpinner() {
@@ -70,6 +92,10 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback {
                     for (DataSnapshot locationSnapshot : snapshot.getChildren()) {
                         Location location = locationSnapshot.getValue(Location.class);
                         if (location != null) {
+                            int id = locationSnapshot.child("Id").getValue(Integer.class) != null
+                                    ? locationSnapshot.child("Id").getValue(Integer.class)
+                                    : 0;
+                            location.setId(id);
                             locations.add(location); // Add the Location object to the list
                             locationNames.add(location.getLoc()); // Add the location name to the Spinner list
                         }
